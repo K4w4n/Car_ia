@@ -1,9 +1,11 @@
-class Sensor {
+import { lerp, getIntersection } from "./utils.js";
+
+export default class Sensor {
     constructor(car) {
         this.car = car;
-        this.rayCount = 5;
+        this.rayCount = 15;
         this.rayLength = 150;
-        this.raySpread = Math.PI * 0.5;
+        this.raySpread = Math.PI * 0.70;
 
         this.rays = [];
         this.readings = [];
@@ -65,8 +67,8 @@ class Sensor {
         this.rays = [];
         for (let i = 0; i < this.rayCount; i++) {
             const rayAngle = lerp(
-                this.raySpread / 2,
-                -this.raySpread / 2,
+                this.raySpread /* / 2 */,
+                -this.raySpread /* / 2 */,
                 this.rayCount == 1 ? 0.5 : i / (this.rayCount - 1)
             ) + this.car.angle;
 

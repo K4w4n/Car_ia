@@ -1,5 +1,6 @@
-const lerp = (A, B, t) => A + (B - A) * t;
-const getIntersection = (A, B, C, D) => {
+export const lerp = (A, B, t) => A + (B - A) * t;
+
+export const getIntersection = (A, B, C, D) => {
     const tTop = (D.x - C.x) * (A.y - C.y) - (D.y - C.y) * (A.x - C.x);
     const uTop = (C.y - A.y) * (A.x - B.x) - (C.x - A.x) * (A.y - B.y);
     const bottom = (D.y - C.y) * (B.x - A.x) - (D.x - C.x) * (B.y - A.y);
@@ -19,7 +20,7 @@ const getIntersection = (A, B, C, D) => {
     }
 }
 
-const polyIntersect = (poly1, poly2) => {
+export const polyIntersect = (poly1, poly2) => {
     for (let i = 0; i < poly1.length; i++) {
         for (let j = 0; j < poly2.length; j++) {
             const touche = getIntersection(

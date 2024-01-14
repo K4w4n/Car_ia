@@ -1,4 +1,9 @@
-class Car {
+import Controls from "./controls.js";
+import NeuralNetwork from "./network.js";
+import Sensor from "./sensor.js";
+import { polyIntersect } from "./utils.js";
+
+export default class Car {
     constructor(x, y, width, height, controlType, maxSpeed = 3) {
         this.x = x;
         this.y = y;
@@ -11,6 +16,7 @@ class Car {
         this.friction = 0.05;
         this.angle = 0;
         this.damaged = false;
+        this.color = '#000000';
 
         this.useBrain = controlType == 'AI';
 
@@ -23,11 +29,11 @@ class Car {
         this.controls = new Controls(controlType);
     }
 
-    update(roadBorders, trafic) {
+    update(roadBorders, trafic, bestCar) {
         if (!this.damaged) {
             this.#move();
             this.polygon = this.#createPolygon()
-            this.damaged = this.#assessDamage(roadBorders, trafic);
+            this.damaged = this.#assessDamage(roadBorders, trafic, bestCar);
         }
         if (this.sensor) {
             this.sensor.update(roadBorders, trafic);
@@ -73,7 +79,7 @@ class Car {
 
     }
 
-    #assessDamage(roadBorders, trafic) {
+    #assessDamage(roadBorders, trafic, bestCar) {
         for (let i = 0; i < roadBorders.length; i++) {
             if (polyIntersect(this.polygon, roadBorders[i]))
                 return true;
@@ -83,6 +89,9 @@ class Car {
             if (polyIntersect(this.polygon, trafic[i].polygon))
                 return true;
         }
+        
+        if(bestCar && Math.abs(bestCar.y - this.y) > 200) return true; 
+        
         return false;
     }
 
