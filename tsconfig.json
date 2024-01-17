@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "moduleResolution": "Node"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "car_ia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "nodemon ./build/index.js",
+    "dev:browser": "tsc --watch"
+  },
+  "author": "k4w4n",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2"
+  }
+}
